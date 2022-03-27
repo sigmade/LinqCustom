@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace LinqCustom
 {
@@ -16,9 +17,21 @@ namespace LinqCustom
             return sum;
         }
 
+        public static int CustomSum<T>(this IEnumerable<T> source, Func<T, int> func)
+        {
+            var sum = 0;
+
+            foreach (var item in source)
+            {
+                sum += func(item);
+            }
+
+            return sum;
+        }
+
         public static int CustomMax(this IEnumerable<int> source) 
         { 
-            var maxValue = 0;
+            var maxValue = int.MinValue;
 
             foreach (var item in source)
             {
